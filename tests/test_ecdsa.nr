@@ -1,21 +1,25 @@
 use dep::std;
-use dep::std::ecdsa::*;
-use crate::main::ecdsa_verify;
+use dep::aztec::ecdsa::*;
+use crate::plume::*;
 
 #[test]
-fn test_ecdsa() {
+fn test_nullifiable_signature() {
     let h_msg = 53149569592524789644493163850982267525392973055378586746964677922035234800137;
     let pk_x = 100096422141634958090364064444190960274596218696503061031096636459309563376785;
     let pk_y = 110179556293605593341770451694039625307685825321260887149556731310264534197388;
-    let r = 72553503838815817402743101685748780230280914176866335266710949810291413551719;
-    let s = 42458960799026964055475071411273441058936202736042648446356561890350071794627;
-    let g_x = 55066263022277343669578718895168534326250603453777594175500187360389116729240;
-    let g_y = 32670510020758816978083085130507043184471273380659243275938904335757337482424;
-    let n = 115792089237316195423570985008687907852837564279074904382605163141518161494337;
-
-    let pk = [pk_x, pk_y];
-    let g = [g_x, g_y];
-
-    let is_valid_signature = ecdsa_verify(h_msg, pk, r, s, n, g);
-    assert(is_valid_signature);
+    
+    // Generate nullifier
+    let nullifier = generate_nullifier(h_msg, pk_x);
+    
+    // Create signature
+    let signature = sign_nullifiable(h_msg, pk_x, nullifier);
+    
+    // Verify signature
+    let is_valid = verify_nullifiable_signature(h_msg, [pk_x, pk_y], signature);
+    assert(is_valid);
+    
+    // Test nullifier uniqueness
+    let different_msg = h_msg + 1;
+    let different_nullifier = generate_nullifier(different_msg, pk_x);
+    assert(nullifier != different_nullifier);
 }

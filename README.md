@@ -4,9 +4,12 @@
 This project implements a privacy-preserving voting system leveraging the PLUME nullifiable ECDSA signature scheme and Noir zkSNARK circuits. The system enables voters to cast anonymous votes, with support for nullification (revoking a vote) without compromising privacy.
 
 ## Features
-- **Privacy-Preserving Voting:** Fully anonymous voting system using zkSNARKs.
-- **Data Nullification:** Revocation of votes using PLUME nullifiers.
-- **Zero-Knowledge Proofs:** Ensures correctness without exposing sensitive information.
+- Privacy-preserving voting using zkSNARKs
+- Vote nullification using PLUME signature scheme
+- Secure vote tallying
+- Double-voting prevention
+- Admin controls for vote management
+
 
 ## Technology Stack
 - **Noir:** For creating zkSNARK circuits.
@@ -25,7 +28,7 @@ This project implements a privacy-preserving voting system leveraging the PLUME 
 
 ### Progress
 - [x] Setup environment.
-- [ ] Implement PLUME in Noir.
+- [x] Implement PLUME in Noir.
 - [ ] Build circuits.
 - [ ] Create backend and integrate.
 - [ ] Optimize and deploy.

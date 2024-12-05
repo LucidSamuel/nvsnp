@@ -1,0 +1,28 @@
+   # .gitignore
+   .env
+   config/.env
+   *.json
+   config/__pycache__/# Environment and secrets
+config/.env
+.env
+*.pem
+*.key
+**/keys/
+**/__pycache__/
+.pytest_cache/
+
+# Build artifacts
+target/
+**/target/
+build/
+dist/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System files
+.DS_Store
+Thumbs.db
